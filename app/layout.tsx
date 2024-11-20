@@ -1,5 +1,6 @@
 import { GeistSans } from "geist/font/sans";
 import Header from "./components/Header";
+import Footer from "./components/Footer"
 import "./globals.css";
 
 const defaultUrl = process.env.VERCEL_URL
@@ -22,6 +23,7 @@ export default function RootLayout({
       <body className="bg-background text-foreground">
         <Header/>
         {children}
+        <Footer/>
       </body>
     </html>
   );

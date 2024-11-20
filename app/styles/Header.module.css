@@ -3,18 +3,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Holtwood+One+SC&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
 
 .header {
-  /* background-color: var(--white); */
-  background-color: var(--primary-color);
-  padding: 30px;
-  padding-inline: 180px;
+  background-color: var(--white);
+  padding: 1rem;
+  padding-top: 2.2rem;
+  padding-inline: 10rem;
   width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items:flex-end;
   position: relative;
-  font-family: "Libre Baskerville", serif;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-optical-sizing: auto;
+  font-style: normal;
   z-index: 10;
-  filter: drop-shadow(0 0 50px rgba(55, 55, 55, 0.4));
+  font-size: 1rem;
+  /* filter: drop-shadow(0 0 50px rgba(55, 55, 55, 0.4)); */
 }
 
 .logoContainer {
@@ -37,8 +41,13 @@
   list-style-type: none;
   margin: 0;
   padding: 0;
-  font-weight: 500;
-  font-size: 1.25rem;
+}
+
+.line {
+  width: 80%;
+  height: 1px; /* Grosor de la línea */
+  background-color: #86654b; /* Color de la línea */
+  margin: 0 auto; /* Centra la línea */
 }
 
 .navList {
@@ -48,14 +57,19 @@
 .navItem {
   margin: 0 30px;
   position: relative;
+  padding-bottom: 1rem;
 }
 
 .navLink {
   text-decoration: none;
-  /* color: black; */
-  color: #fff;
+  color: #000;
   transition: color 0.3s ease, background-color 0.3s ease;
   border-radius: 5px;
+}
+
+.activeLink {
+  font-weight: 700;
+  color: var(--primary-color);
 }
 
 .navLink:hover::after,
@@ -64,7 +78,7 @@
 }
 
 .navLink:hover {
-  color: var(--primary-color-dark);
+  color: var(--primary-color);
 }
 
 /* Botón hamburguesa */
@@ -108,7 +122,7 @@
 }
 
 .navOpen .closeButton {
-  display: block; /* Mostrar botón cuando el menú está abierto */
+  display: block;
 }
 
 @media (max-width: 768px) {
