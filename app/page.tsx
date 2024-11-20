@@ -1,13 +1,32 @@
-import styles from './styles/Home.module.css'
+import styles from './styles/Home.module.css';
 
-export default async function Index() {
+const Home = () => {
   return (
-    <>
-      <main className="flex-1 flex flex-col gap-6 px-4">
-        <h2 className={styles.estiloprueba}>Rosaura trabaja aquí</h2>
-        <p className={styles.estiloprueba}>lol q mal</p>
-        
-      </main>
-    </>
+    <main className={styles.main}>
+      {/* Imagen grande */}
+      <section className={styles.hero}>
+        <img src="/HOME/xxx.png" alt="Bolsa principal" className={styles.heroImage} />
+      </section>
+
+      {/* Texto y botón */}
+      <section className={styles.description}>
+        <p>
+          En Efectos encontrarás una exclusiva selección de bolsas diseñadas
+          para cada estilo, además de pequeños tesoros y accesorios únicos.
+          Descubre el complemento perfecto para cualquier ocasión y añade un
+          toque especial a tu día.
+        </p>
+        <a href="#" className={styles.button}>CONOCE NUESTROS PRODUCTOS</a>
+      </section>
+
+      {/* Imágenes pequeñas */}
+      <section className={styles.products}>
+        <div className={styles.product}><img src="/HOME/wkjbcd.png" alt="Bolsa 2" /></div>
+        <div className={styles.product}><img src="/HOME/cmmc.png" alt="Bolsa 3" /></div>
+        <div className={styles.product}><img src="/HOME/cdcdcdcd.png" alt="Bolsa 4" /></div>
+      </section>
+    </main>
   );
-}
+};
+
+export default Home;
