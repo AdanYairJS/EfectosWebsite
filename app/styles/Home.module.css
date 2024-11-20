@@ -1,4 +1,56 @@
-.estiloprueba{
-    color:blue;
-
-}
+/* Contenedor principal */
+.main {
+    padding: 0px 20px;
+    text-align: center;
+  }
+  
+  /* Sección de la imagen grande */
+  .hero {
+    margin-bottom: 20px;
+  }
+  
+  .heroImage {
+    width: 75%;
+    border-radius: 8px; 
+    margin: 0 auto;
+  }
+  
+  /* Texto y botón */
+  .description {
+    margin: 20px auto;
+    font-size: 16px;
+    color: #555;
+    max-width: 800px;
+  }
+  
+  .button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #e91e63;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+  
+  .button:hover {
+    background-color: #d81b60;
+  }
+  
+  /* Imágenes pequeñas */
+  .products {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+  }
+  
+  .product img {
+    width: 120px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  
