@@ -5,7 +5,7 @@ const Home = () => {
     <main className={styles.main}>
       {/* Imagen grande */}
       <section className={styles.hero}>
-        <img src="/HOME/xxx.png" alt="Bolsa principal" className={styles.heroImage} />
+        <img src="/HOME/Portada.png" alt="Bolsa principal" className={styles.heroImage} />
       </section>
 
       {/* Texto y botón */}
@@ -23,7 +23,7 @@ const Home = () => {
       <section className={styles.products}>
         <div className={styles.product}><img src="/HOME/wkjbcd.png" alt="Bolsa 2" /></div>
         <div className={styles.product}><img src="/HOME/cmmc.png" alt="Bolsa 3" /></div>
-        <div className={styles.product}><img src="/HOME/cdcdcdcd.png" alt="Bolsa 4" /></div>
+        <div className={styles.product}><img src="/HOME/bote.png" alt="Bolsa 4" /></div>
       </section>
     </main>
   );
