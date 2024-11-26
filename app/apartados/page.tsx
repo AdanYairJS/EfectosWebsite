@@ -21,9 +21,7 @@ export default async function Index() {
             <div className={styles.textContainer}>
               <h2 className={styles.title}>Apartados</h2>
               <p className={styles.paragraph}>
-                En nuestra tienda, puedes apartar tus productos favoritos con
-                facilidad. Sigue los pasos indicados y asegura tus artículos
-                preferidos antes de que se agoten.
+              En Efectos ofrecemos un sistema de apartado para que puedas reservar tus productos favoritos sin preocuparte por la disponibilidad. Asegura ese accesorio que tanto te gusta y recógelo cuando estés listo.
               </p>
             </div>
           </div>
@@ -39,6 +37,7 @@ export default async function Index() {
               </li>
             ))}
           </ul>
+          <a href="#" className={styles.button}>APARTAR AHORA</a>
         </section>
       </main>
     </>

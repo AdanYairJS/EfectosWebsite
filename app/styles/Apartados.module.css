@@ -1,8 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital@0;1&display=swap');
 
-/* General */
-.section {
+  .section {
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -10,30 +9,31 @@
   }
   
   .title {
-    padding: 30px 0;
     font-family: "Dancing Script", cursive;
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
     font-size: 4rem;
-}
+  }
   
-  /* Imagen y texto */
   .imageTextContainer {
     display: flex;
     align-items: center;
     gap: 16px;
-    flex-wrap: wrap; /* Ajusta el contenido para pantallas pequeñas */
+    flex-wrap: wrap; 
+    padding: 30px 10%;
   }
   
   .image {
     flex: 1;
-    max-width: 50%; /* Ajusta el tamaño máximo */
+    max-width: 50%;
     height: auto;
     border-radius: 8px;
   }
   
   .textContainer {
+    margin-left: 35px;
+    width: 40%;
     flex: 2;
     display: flex;
     flex-direction: column;
@@ -41,9 +41,6 @@
   }
 
   .paragraph {
-    /* font-size: 16px;
-    line-height: 1.5;
-    color: #555; */
     font-family: "Raleway", serif;
     font-optical-sizing: auto;
     font-weight: 400;
@@ -51,30 +48,40 @@
     font-size: 1rem;
   }
   
-  /* Lista de pasos */
   .stepsSection {
     display: flex;
     flex-direction: column;
     gap: 16px;
+    margin-bottom: 30px;
   }
   
   .stepsTitle {
-    font-size: 20px;
-    font-weight: bold;
+    font-size: 1.8rem;
+    font-weight: bolder;
     text-align: center;
+    /* font-family: "Dancing Script", cursive;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 4rem; */
   }
   
   .stepsList {
+    /* background-color: aliceblue; */
+    align-items: center;
+    padding:15px 20% 30px;
     list-style: none;
-    padding: 0;
     display: flex;
     flex-direction: column;
     gap: 16px;
   }
   
   .stepItem {
+    /* background-color: blueviolet; */
+    width: 50%;
     display: flex;
     align-items: center;
+    justify-content: flex-start;
     gap: 12px;
   }
   
@@ -85,16 +92,32 @@
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background-color: #f8b4d9; /* Rosa */
+    background-color: var(--primary-color);
     color: white;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 1rem;
     flex-shrink: 0;
   }
   
   .stepText {
-    font-size: 16px;
-    line-height: 1.5;
-    color: #333;
+    font-family: "Raleway", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1rem;
+  }
+
+  .button {
+    display: inline-block;
+    align-self: center;
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: #fff;
+    border-radius: 20px;
+    font-weight: bolder;
+  }
+  
+  .button:hover {
+    background-color: #a6194d;
   }
   
