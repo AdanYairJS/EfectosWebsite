@@ -38,7 +38,7 @@ export default async function Index() {
               </li>
             ))}
           </ul>
-          <a href="#" className={styles.button}>APARTAR AHORA</a>
+          <a href="#" className={styles.button}>APARTAR</a>
         </section>
       </main>
     </>
