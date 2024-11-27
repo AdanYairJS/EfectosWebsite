@@ -1,3 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital@0;1&display=swap');
+
+
+
 /* Contenedor principal */
 .main {
     padding: 0px 20px;
@@ -6,7 +11,7 @@
   
   /* Sección de la imagen grande */
   .hero {
-    margin-top: 40px;
+    padding-top: 40px;
     margin-bottom: 20px;
   }
   
@@ -24,6 +29,7 @@
     width: 40%;
     padding-left: 10px;
     font-size: 16px;
+    font-family: "Raleway", serif;
     color: #555;
     max-width: 800px;
     text-align: left;
@@ -54,6 +60,7 @@
     justify-content: center;
     gap: 15px;
     margin-top: 30px;
+    width: 30%;
   }
   
   .product img {

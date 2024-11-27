@@ -29,6 +29,7 @@ html {
 main {
   flex: 1;
   min-height: 72vh;
+  background-color: #f6f4f3;
 }
 
 @font-face {

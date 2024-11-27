@@ -1,80 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital@0;1&display=swap');
+
+
 .contactPage {
     padding: 40px 20px; /* Espaciado general */
   }
   
   .contactContainer {
     display: flex;
-    justify-content: space-between; /* Mantiene el texto y el formulario separados */
-    align-items: flex-start; /* Alinea al inicio verticalmente */
-    gap: 40px; /* Espaciado entre el texto y el formulario */
-    max-width: 900px; /* Ancho máximo del contenedor */
-    margin: 0 auto; /* Centra el contenedor horizontalmente */
+    justify-content: space-between; 
+    align-items: flex-start; 
+    gap: 40px; 
+    max-width: 900px; 
+    margin: 0 auto; 
   }
   
   .contactInfo {
     flex: 1;
     font-size: 16px;
-    line-height: 1.5; /* Reduce el espaciado entre las líneas */
+    line-height: 1.5;
     color: #333;
-    max-width: 400px; /* Limita el ancho del texto */
+    max-width: 400px; 
+    font-family: "Raleway", serif;
   }
   
   .contactTitle {
-    font-family: Arial, sans-serif;
-    font-size: 36px;
+    font-family: "Dancing Script", cursive;
+    font-size: 50px;
     font-weight: bold;
-    color: #e91e63;
+    color: #000;
     margin-bottom: 20px; 
   }
   
   .contactForm {
     flex: 1;
     display: flex;
-    flex-direction: column; /* Los campos y el botón en columna */
-    gap: 20px; /* Espaciado entre los campos */
-    max-width: 350px; /* Limita el ancho del formulario */
+    flex-direction: column; 
+    gap: 20px; 
+    max-width: 350px; 
+    font-family: "Raleway", serif;
   }
   
   .inputField,
   .textArea {
-    width: 100%; /* Los campos ocupan todo el ancho */
-    padding: 10px 15px; /* Espaciado interno */
-    font-size: 14px; /* Tamaño del texto */
-    border-radius: 0; /* Elimina los bordes redondeados */
-    background-color: #f8c4d8; /* Fondo rosado claro */
-    color: #333; /* Color del texto dentro de los campos */
+    width: 100%; 
+    padding: 10px 15px; 
+    font-size: 14px; 
+    border-radius: 0; 
+    background-color: #f8c4d8; 
+    color: #333; 
   }
   
   .inputField::placeholder,
   .textArea::placeholder {
-    color: hotpink; /* Cambia el color del texto del placeholder */
+    color: hotpink; 
   }
   
   .textArea {
-    height: 100px; /* Altura del área de texto */
-    resize: none; /* Evita que el usuario cambie el tamaño */
+    height: 100px; 
+    resize: none; 
   }
   
   .submitButton {
-    background-color: #e91e63; /* Color del botón */
-    color: white; /* Color del texto del botón */
-    padding: 10px 20px; /* Espaciado interno */
-    font-size: 14px; /* Tamaño del texto */
-    border: none; /* Sin bordes */
-    border-radius: 25px; /* Bordes redondeados */
-    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-    align-self: flex-start; /* Alinea el botón a la izquierda del formulario */
-    max-width: 150px; /* Ancho máximo del botón */
-    text-align: center; /* Centra el texto dentro del botón */
+    background-color: #e91e63; 
+    color: white; 
+    padding: 10px 20px; 
+    font-size: 14px; 
+    border: none; 
+    border-radius: 25px; 
+    cursor: pointer; 
+    align-self: flex-start; 
+    max-width: 150px; 
+    text-align: center;
   }
   
   .submitButton:hover {
-    background-color: #d81b60; /* Color del botón al pasar el mouse */
+    background-color: #d81b60; 
   }
   
   .contactInfo p {
-    margin-bottom: 15px; /* Espaciado entre párrafos */
-    text-align: justify; /* Justifica el texto */
+    margin-bottom: 15px; 
+    text-align: justify;
   }
   
   

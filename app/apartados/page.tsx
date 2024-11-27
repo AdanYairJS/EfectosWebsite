@@ -2,10 +2,11 @@ import styles from "../styles/Apartados.module.css";
 
 export default async function Index() {
   const steps = [
-    "Selecciona el producto que deseas apartar.",
-    "Haz clic en el botón 'Apartar'.",
-    "Llena el formulario con tus datos.",
-    "Confirma tu apartado y espera la notificación.",
+    "Selecciona el producto que deseas apartar desde la sección de productos y haz click en el botón de 'Apartar'.",
+    "Rellena el formulario con tus datos.",
+    "Da click en el botón de 'Generar Clave'",
+    "Coloca la clave en el concepto de tu transferencia",
+    "Espera a que un operador verifique tu pago y recibe la confimacion vía watsop",
   ];
 
   return (
