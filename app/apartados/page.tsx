@@ -6,6 +6,7 @@ export default async function Index() {
     "Haz clic en el botón 'Apartar'.",
     "Llena el formulario con tus datos.",
     "Confirma tu apartado y espera la notificación.",
+    "Tocarse la cola",
   ];
 
   return (
@@ -37,7 +38,7 @@ export default async function Index() {
               </li>
             ))}
           </ul>
-          <a href="#" className={styles.button}>APARTAR AHORA</a>
+          <a href="#" className={styles.button}>APARTAR</a>
         </section>
       </main>
     </>

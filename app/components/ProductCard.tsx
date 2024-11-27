@@ -12,7 +12,7 @@ const Card: React.FC<CardProps> = ({ image, name, price }) => {
     <div className={styles.card}>
       <img src={image} alt={name} className={styles.cardImage}/>
       <h2 className={styles.cardTitle}>{name}</h2>
-      <p className={styles.cardPrice}>{price}</p>
+      <p className={styles.cardPrice}>${price}</p>
       <button className={styles.cardButton}>Apartar</button>
     </div>
   );
