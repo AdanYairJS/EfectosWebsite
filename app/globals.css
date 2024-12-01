@@ -11,7 +11,7 @@
   --background-end-rgb: 240, 240, 240;
   --primary-color: #d81159;
   --primary-background: #e60036;
-  --primary-color-light: #fffcfa;
+  --primary-color-light: #f6f4f3;
   --primary-color-dark: #db6e09;
   --text-dark: #18181b;
   --text-light: #6b7280;
@@ -26,10 +26,14 @@ html {
   width: 100vw;
 } */
 
+html {
+  background-color: var(--primary-color-light);
+}
+
 main {
   flex: 1;
   min-height: 72vh;
-  background-color: #f6f4f3;
+  background-color: var(--primary-color-light);
 }
 
 @font-face {

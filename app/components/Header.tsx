@@ -25,13 +25,12 @@ const Header = () => {
   ];
 
   return (
-    <>
-      <header className={styles.header}>
+    <header className={styles.headerContainer}>
+      <section className={styles.header}>
         <div className={styles.logoContainer}>
           <Image src="/logo.png" alt="Logo del restaurante" className={styles.logo} width={300} height={300} />
         </div>
 
-        {/* Botón de menú hamburguesa */}
         {!isMenuOpen && (
           <button className={styles.hamburger} onClick={toggleMenu}>
             <span className={styles.hamburgerLine}></span>
@@ -40,7 +39,6 @@ const Header = () => {
           </button>
         )}
 
-        {/* Botón de cierre (X) */}
         {isMenuOpen && (
           <button className={styles.closeButton} onClick={toggleMenu}>
             &times;
@@ -63,9 +61,9 @@ const Header = () => {
             ))}
           </ul>
         </nav>
-      </header>
+      </section>
       <div className={styles.line}></div>
-    </>
+    </header>
   );
 };
 

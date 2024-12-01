@@ -1,13 +1,37 @@
+"use client";
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import ModalApartar from "../components/ModalApartar";
 import styles from "../styles/Apartados.module.css";
 
-export default async function Index() {
+export default function Apartados() {
+  const searchParams = useSearchParams();
+  const name = searchParams.get("name");
+  const price = searchParams.get("price");
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const steps = [
     "Selecciona el producto que deseas apartar desde la sección de productos y haz click en el botón de 'Apartar'.",
-    "Rellena el formulario con tus datos.",
-    "Da click en el botón de 'Generar Clave'",
-    "Coloca la clave en el concepto de tu transferencia",
-    "Espera a que un operador verifique tu pago y recibe la confimacion vía watsop",
+    "Rellena el formulario con tus datos y presiona el botón de 'Generar clave'.",
+    "Coloca la clave generada en el concepto al momento de hacer tu transferencia con el monto indicado.",
+    "Una vez realizado el pago presiona el botón 'Finalizar' y espera a que un operador apruebe el apartado.",
+    "Puedes comprobar el estado de tu apartado en la barra de búsqueda mediante la clave generada, se te notificará por correo electrónico cuando sea aprobada.",
   ];
+
+  useEffect(() => {
+    if (name && price) {
+      setIsModalOpen(true);
+    }
+  }, [name, price]);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <>
@@ -22,7 +46,7 @@ export default async function Index() {
             <div className={styles.textContainer}>
               <h2 className={styles.title}>Apartados</h2>
               <p className={styles.paragraph}>
-              En Efectos ofrecemos un sistema de apartado para que puedas reservar tus productos favoritos sin preocuparte por la disponibilidad. Asegura ese accesorio que tanto te gusta y recógelo cuando estés listo.
+                En Efectos ofrecemos un sistema de apartado para que puedas reservar tus productos favoritos sin preocuparte por la disponibilidad. Asegura ese accesorio que tanto te gusta y recógelo cuando estés listo.
               </p>
             </div>
           </div>
@@ -38,8 +62,18 @@ export default async function Index() {
               </li>
             ))}
           </ul>
-          <a href="#" className={styles.button}>APARTAR</a>
+          <a href="#" className={styles.button}>BUSCA PRODUCTOS</a>
         </section>
+
+        {/* <button onClick={handleOpenModal} className={styles.openModalButton}>
+          Apartar Producto
+        </button> */}
+
+        <ModalApartar
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          product={{ name: name as string, price: Number(price) }}
+        />
       </main>
     </>
   );

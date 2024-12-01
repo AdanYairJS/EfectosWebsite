@@ -9,7 +9,7 @@ const Home = () => {
       </section>
 
       {/* Texto y botón */}
-      <section style={{display:'flex', flexDirection: 'row'}}>
+      <section style={{display:'flex', flexDirection: 'row', alignItems: 'center'}}>
         <div className={styles.description}>
           <p>
             En Efectos encontrarás una exclusiva selección de bolsas diseñadas

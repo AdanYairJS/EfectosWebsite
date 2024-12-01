@@ -67,7 +67,6 @@
   }
   
   .stepsList {
-    /* background-color: aliceblue; */
     align-items: center;
     padding:15px 20% 30px;
     list-style: none;
@@ -77,8 +76,8 @@
   }
   
   .stepItem {
-    /* background-color: blueviolet; */
-    width: 50%;
+    /* background-color: #a6194d; */
+    width: 80%;
     display: flex;
     align-items: center;
     justify-content: flex-start;
