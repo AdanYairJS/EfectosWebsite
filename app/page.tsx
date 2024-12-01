@@ -8,8 +8,8 @@ const Home = () => {
         <img src="/HOME/COVER.png" alt="Bolsa principal" className={styles.heroImage} />
       </section>
 
-      {/* Texto y botón */}
-      <section style={{display:'flex', flexDirection: 'row', alignItems: 'center'}}>
+      {/* Texto, botón e imágenes */}
+      <section className={styles.content}>
         <div className={styles.description}>
           <p>
             En Efectos encontrarás una exclusiva selección de bolsas diseñadas

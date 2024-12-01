@@ -46,7 +46,9 @@ export default function Apartados() {
             <div className={styles.textContainer}>
               <h2 className={styles.title}>Apartados</h2>
               <p className={styles.paragraph}>
-                En Efectos ofrecemos un sistema de apartado para que puedas reservar tus productos favoritos sin preocuparte por la disponibilidad. Asegura ese accesorio que tanto te gusta y recógelo cuando estés listo.
+                En Efectos ofrecemos un sistema de apartado para que puedas reservar
+                tus productos favoritos sin preocuparte por la disponibilidad. Asegura
+                ese accesorio que tanto te gusta y recógelo cuando estés listo.
               </p>
             </div>
           </div>
@@ -64,10 +66,6 @@ export default function Apartados() {
           </ul>
           <a href="#" className={styles.button}>BUSCA PRODUCTOS</a>
         </section>
-
-        {/* <button onClick={handleOpenModal} className={styles.openModalButton}>
-          Apartar Producto
-        </button> */}
 
         <ModalApartar
           isOpen={isModalOpen}
