@@ -57,10 +57,11 @@
   /* Imágenes pequeñas */
   .products {
     display: flex;
-    justify-content: center;
+    height: 100%;
+    justify-content: flex-end;
     gap: 15px;
-    margin-top: 30px;
-    width: 30%;
+    /* margin-top: 30px; */
+    width: 34.5%;
   }
   
   .product img {

@@ -92,6 +92,7 @@ const ModalApartar: React.FC<ModalProps> = ({ isOpen, onClose, product }) => {
         ) : (
           <>
             <p>Clave generada: {generatedKey}</p>
+            <p>Realiza la transferencia a la cuenta: 4915669522269420 </p>
             <button onClick={handleClose} className={styles.completeButton}>
               Completado
             </button>

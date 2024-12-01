@@ -13,10 +13,10 @@ export default function Apartados() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const steps = [
     "Selecciona el producto que deseas apartar desde la sección de productos y haz click en el botón de 'Apartar'.",
-    "Rellena el formulario con tus datos.",
-    "Da click en el botón de 'Generar Clave'",
-    "Coloca la clave en el concepto de tu transferencia",
-    "Espera a que un operador verifique tu pago y recibe la confimacion vía watsop",
+    "Rellena el formulario con tus datos y presiona el botón de 'Generar clave'.",
+    "Coloca la clave generada en el concepto al momento de hacer tu transferencia con el monto indicado.",
+    "Una vez realizado el pago presiona el botón 'Finalizar' y espera a que un operador apruebe el apartado.",
+    "Puedes comprobar el estado de tu apartado en la barra de búsqueda mediante la clave generada, se te notificará por correo electrónico cuando sea aprobada.",
   ];
 
   useEffect(() => {
@@ -62,7 +62,7 @@ export default function Apartados() {
               </li>
             ))}
           </ul>
-          <a href="#" className={styles.button}>APARTAR</a>
+          <a href="#" className={styles.button}>BUSCA PRODUCTOS</a>
         </section>
 
         {/* <button onClick={handleOpenModal} className={styles.openModalButton}>
