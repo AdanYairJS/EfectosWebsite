@@ -5,7 +5,7 @@ const Home = () => {
     <main className={styles.main}>
       {/* Imagen grande */}
       <section className={styles.hero}>
-        <img src="/HOME/Portada.png" alt="Bolsa principal" className={styles.heroImage} />
+        <img src="/HOME/COVER.png" alt="Bolsa principal" className={styles.heroImage} />
       </section>
 
       {/* Texto y botón */}
@@ -22,9 +22,9 @@ const Home = () => {
 
         {/* Imágenes pequeñas */}
         <div className={styles.products}>
-          <div className={styles.product}><img src="/HOME/wkjbcd.png" alt="Bolsa 2" /></div>
-          <div className={styles.product}><img src="/HOME/cmmc.png" alt="Bolsa 3" /></div>
-          <div className={styles.product}><img src="/HOME/bote.png" alt="Bolsa 4" /></div>
+          <div className={styles.product}><img src="/HOME/MOXILA.png" alt="Bolsa 2" /></div>
+          <div className={styles.product}><img src="/HOME/8.png" alt="Bolsa 3" /></div>
+          <div className={styles.product}><img src="/HOME/12.png" alt="Bolsa 4" /></div>
         </div>
       </section>
     </main>
