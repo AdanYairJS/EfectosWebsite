@@ -1,0 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital@0;1&display=swap');
+
+  .modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modal {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .modal h2 {
+    font-family: "Dancing Script", cursive;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    margin: 0;
+    font-size: 2.5rem;
+    text-align: center;
+  }
+  
+  .modal p {
+    font-family: "Raleway", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    text-align: left;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .form input {
+    font-family: "Raleway", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+  
+  .generateButton,
+  .completeButton,
+  .cancelButton {
+    font-family: "Raleway", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .generateButton {
+    background-color: var(--primary-color);
+    color: #fff;
+  }
+  
+  .generateButton:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .completeButton {
+    background-color: var(--primary-color);
+    color: #fff;
+  }
+  
+  .cancelButton {
+    background-color: #ccc;
+    color: #fff;
+  }
+  
+  .generateButton:hover:not(:disabled),
+  .completeButton:hover,
+  .cancelButton:hover {
+    opacity: 0.9;
+  }
+  
+  /* Media Queries */
+  @media (max-width: 768px) {
+    .modal {
+      width: 95%;
+      max-width: 400px;
+    }
+  
+    .modal h2 {
+      font-size: 1.25rem;
+    }
+  
+    .form input {
+      font-size: 0.9rem;
+    }
+  
+    .generateButton,
+    .completeButton,
+    .cancelButton {
+      font-size: 0.9rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .modal {
+      padding: 15px;
+    }
+  
+    .modal h2 {
+      font-size: 1rem;
+    }
+  
+    .modal p {
+      font-size: 0.9rem;
+    }
+  
+    .form input {
+      padding: 8px;
+      font-size: 0.85rem;
+    }
+  
+    .generateButton,
+    .completeButton,
+    .cancelButton {
+      font-size: 0.85rem;
+      padding: 8px 15px;
+    }
+  }
+  
