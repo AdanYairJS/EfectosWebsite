@@ -17,20 +17,39 @@ const ModalApartar: React.FC<ModalProps> = ({ isOpen, onClose, product }) => {
   const [isValid, setIsValid] = useState(false);
   const [generatedKey, setGeneratedKey] = useState("");
 
+  const validateForm = (data: typeof formData) => {
+    const emailRegex = /\S+@\S+\.\S+/;
+    const isPhoneValid = /^\d{10}$/.test(data.phone); // Solo números y exactamente 10 dígitos
+    const allFilled = Object.values(data).every((field) => field.trim() !== "");
+
+    return allFilled && emailRegex.test(data.email) && isPhoneValid;
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
 
-    const emailRegex = /\S+@\S+\.\S+/;
-    const isPhoneValid = /^\d+$/.test(formData.phone || "");
-    const allFilled = Object.values({ ...formData, [name]: value }).every(
-      (field) => field.trim() !== ""
-    );
+    // Solo permitir números en el campo de teléfono
+    if (name === "phone" && !/^\d*$/.test(value)) {
+      return;
+    }
 
-    setIsValid(allFilled && emailRegex.test(formData.email) && isPhoneValid);
+    const updatedData = { ...formData, [name]: value };
+    setFormData(updatedData);
+
+    // Validar campos
+    setIsValid(validateForm(updatedData));
   };
 
   const handleGenerateKey = () => {
+    if (!isValid) {
+      if (!/^\d{10}$/.test(formData.phone)) {
+        alert("El número de teléfono debe tener exactamente 10 dígitos.");
+      } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+        alert("El correo electrónico no es válido.");
+      }
+      return;
+    }
+
     setGeneratedKey(`AP-${Math.random().toString(36).substring(2, 8).toUpperCase()}`);
   };
 
@@ -73,10 +92,11 @@ const ModalApartar: React.FC<ModalProps> = ({ isOpen, onClose, product }) => {
             onChange={handleChange}
           />
           <input
-            type="text"
+            type="tel"
             name="phone"
-            placeholder="Tu teléfono"
+            placeholder="Tu teléfono (10 dígitos)"
             value={formData.phone}
+            maxLength={10} // Limitar a 10 caracteres
             onChange={handleChange}
           />
         </form>
@@ -92,7 +112,7 @@ const ModalApartar: React.FC<ModalProps> = ({ isOpen, onClose, product }) => {
         ) : (
           <>
             <p>Clave generada: {generatedKey}</p>
-            <p>Realiza la transferencia a la cuenta: 4915669522269420 </p>
+            <p>Realiza la transferencia a la cuenta: 4915669522269420</p>
             <button onClick={handleClose} className={styles.completeButton}>
               Completado
             </button>
