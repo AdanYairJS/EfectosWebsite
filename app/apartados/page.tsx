@@ -1,16 +1,18 @@
-"use client";
+'use client';
+
+import React, { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
-import ModalApartar from "../components/ModalApartar";
+import ModalApartar from "../components/ModalApartar"; 
+import { fetchProductById } from "@/services/supabaseClient";
 import styles from "../styles/Apartados.module.css";
 
-export default function Apartados() {
+const ApartadosPage = () => {
   const searchParams = useSearchParams();
-  const name = searchParams.get("name");
-  const price = searchParams.get("price");
+  const id = searchParams.get("id");
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [product, setProduct] = useState<{ id: number; name: string; price: number } | null>(null);
+
   const steps = [
     "Selecciona el producto que deseas apartar desde la sección de productos y haz click en el botón de 'Apartar'.",
     "Rellena el formulario con tus datos y presiona el botón de 'Generar clave'.",
@@ -20,14 +22,28 @@ export default function Apartados() {
   ];
 
   useEffect(() => {
-    if (name && price) {
-      setIsModalOpen(true);
-    }
-  }, [name, price]);
+    const fetchProduct = async () => {
+      if (id) {
+        const numericId = Number(id);
 
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
+        if (isNaN(numericId)) {
+          alert("El ID proporcionado no es un número válido.");
+          return;
+        }
+
+        const productData = await fetchProductById(numericId);
+
+        if (productData) {
+          setProduct(productData);
+          setIsModalOpen(true);
+        } else {
+          alert(`El producto no existe. ID: ${numericId}`);
+        }
+      }
+    };
+
+    fetchProduct();
+  }, [id]);
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -67,12 +83,16 @@ export default function Apartados() {
           <a href="#" className={styles.button}>BUSCA PRODUCTOS</a>
         </section>
 
+        {isModalOpen && product && (
         <ModalApartar
           isOpen={isModalOpen}
           onClose={handleCloseModal}
-          product={{ name: name as string, price: Number(price) }}
+          productId={product.id}
         />
+      )}
       </main>
     </>
   );
 }
+
+export default ApartadosPage;

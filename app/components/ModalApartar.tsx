@@ -1,13 +1,20 @@
-import React, { useState } from "react";
+'use client';
+import React, { useState, useEffect } from "react";
+import { fetchProductById, insertApartado } from "@/services/supabaseClient";
 import styles from "../styles/ModalApartar.module.css";
 
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
-  product: { name: string; price: number };
+  productId: number;
 }
 
-const ModalApartar: React.FC<ModalProps> = ({ isOpen, onClose, product }) => {
+const ModalApartar: React.FC<ModalProps> = ({ isOpen, onClose, productId }) => {
+  const [product, setProduct] = useState<{
+    name: string;
+    price: number;
+    codigo: string;
+  } | null>(null);  
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -17,21 +24,72 @@ const ModalApartar: React.FC<ModalProps> = ({ isOpen, onClose, product }) => {
   const [isValid, setIsValid] = useState(false);
   const [generatedKey, setGeneratedKey] = useState("");
 
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const productData = await fetchProductById(productId);
+      if (productData) {
+        setProduct(productData);
+      }
+    };
+
+    if (isOpen) {
+      fetchProduct();
+    }
+  }, [isOpen, productId]);
+
+  const validateForm = (data: typeof formData) => {
+    const emailRegex = /\S+@\S+\.\S+/;
+    const isPhoneValid = /^\d{10}$/.test(data.phone);
+    const allFilled = Object.values(data).every((field) => field.trim() !== "");
+
+    return allFilled && emailRegex.test(data.email) && isPhoneValid;
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
 
-    const emailRegex = /\S+@\S+\.\S+/;
-    const isPhoneValid = /^\d+$/.test(formData.phone || "");
-    const allFilled = Object.values({ ...formData, [name]: value }).every(
-      (field) => field.trim() !== ""
-    );
+    if (name === "phone" && !/^\d*$/.test(value)) {
+      return;
+    }
 
-    setIsValid(allFilled && emailRegex.test(formData.email) && isPhoneValid);
+    const updatedData = { ...formData, [name]: value };
+    setFormData(updatedData);
+    setIsValid(validateForm(updatedData));
   };
 
   const handleGenerateKey = () => {
-    setGeneratedKey(`AP-${Math.random().toString(36).substring(2, 8).toUpperCase()}`);
+    if (!isValid || !product) {
+      alert("Completa todos los campos correctamente.");
+      return;
+    }
+    const key = `AP-${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
+    setGeneratedKey(key);
+  };
+
+  const handleConfirm = async () => {
+    if (!generatedKey || !product) {
+      alert("Por favor, genera una clave antes de confirmar el apartado.");
+      return;
+    }
+
+    const payment = product.price * 0.3;
+
+    const success = await insertApartado({
+      productCode: product.codigo,
+      userName: formData.name,
+      email: formData.email,
+      address: formData.address,
+      phone: formData.phone,
+      generatedKey,
+      payment,
+    });
+
+    if (success) {
+      alert("Producto apartado exitosamente.");
+      handleClose();
+    } else {
+      alert("Hubo un error al realizar el apartado.");
+    }
   };
 
   const handleClose = () => {
@@ -40,7 +98,7 @@ const ModalApartar: React.FC<ModalProps> = ({ isOpen, onClose, product }) => {
     onClose();
   };
 
-  if (!isOpen) return null;
+  if (!isOpen || !product) return null;
 
   return (
     <div className={styles.modalOverlay}>
@@ -73,28 +131,25 @@ const ModalApartar: React.FC<ModalProps> = ({ isOpen, onClose, product }) => {
             onChange={handleChange}
           />
           <input
-            type="text"
+            type="tel"
             name="phone"
-            placeholder="Tu teléfono"
+            placeholder="Tu teléfono (10 dígitos)"
             value={formData.phone}
+            maxLength={10}
             onChange={handleChange}
           />
         </form>
 
         {!generatedKey ? (
-          <button
-            disabled={!isValid}
-            onClick={handleGenerateKey}
-            className={styles.generateButton}
-          >
+          <button disabled={!isValid} onClick={handleGenerateKey} className={styles.generateButton}>
             Generar Clave
           </button>
         ) : (
           <>
             <p>Clave generada: {generatedKey}</p>
-            <p>Realiza la transferencia a la cuenta: 4915669522269420 </p>
-            <button onClick={handleClose} className={styles.completeButton}>
-              Completado
+            <p>Realiza la transferencia a la cuenta: 4915669522269420</p>
+            <button onClick={handleConfirm} className={styles.completeButton}>
+              Confirmar
             </button>
           </>
         )}
