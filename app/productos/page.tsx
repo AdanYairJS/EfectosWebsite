@@ -2,9 +2,15 @@ import { fetchProducts } from "@/services/supabaseClient";
 import styles from "../styles/Productos.module.css";
 import Card from "../components/ProductCard";
 
+export const dynamic = "force-dynamic";
+
 export default async function Productos() {
   const products = await fetchProducts();
 
+  return <ProductosClient products={products} />;
+}
+
+function ProductosClient({ products }: { products: any[] }) {
   return (
     <main>
       <section className={styles.section_header}>
@@ -27,7 +33,9 @@ export default async function Productos() {
             />
           ))
         ) : (
-          <p className={styles.noProductsText}>No hay productos disponibles en este momento.</p>
+          <p className={styles.noProductsText}>
+            No hay productos disponibles en este momento.
+          </p>
         )}
       </div>
     </main>

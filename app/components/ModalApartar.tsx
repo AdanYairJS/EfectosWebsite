@@ -1,5 +1,6 @@
 'use client';
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { fetchProductById, insertApartado } from "@/services/supabaseClient";
 import styles from "../styles/ModalApartar.module.css";
 
@@ -10,6 +11,7 @@ interface ModalProps {
 }
 
 const ModalApartar: React.FC<ModalProps> = ({ isOpen, onClose, productId }) => {
+  const router = useRouter();
   const [product, setProduct] = useState<{
     name: string;
     price: number;
@@ -96,6 +98,7 @@ const ModalApartar: React.FC<ModalProps> = ({ isOpen, onClose, productId }) => {
     setGeneratedKey("");
     setFormData({ name: "", email: "", address: "", phone: "" });
     onClose();
+    router.push("/apartados");
   };
 
   if (!isOpen || !product) return null;

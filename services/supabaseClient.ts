@@ -17,14 +17,19 @@ interface Apartado {
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export async function fetchProducts() {
-  const { data: products, error } = await supabase.from("productos").select();
+  try {
+    const { data: products, error } = await supabase.from("productos").select();
 
-  if (error) {
-    console.error("Error fetching products:", error);
+    if (error) {
+      console.error("Error fetching products:", error.message);
+      return [];
+    }
+
+    return products || [];
+  } catch (err) {
+    console.error("Unexpected error fetching products:", err);
     return [];
   }
-
-  return products || [];
 }
 
 export async function fetchProductById(productId: number) {
