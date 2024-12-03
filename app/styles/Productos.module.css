@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital@0;1&display=swap');
+
+.main {
+    flex: 1;
+}
+
+.section_header {
+    width: 100%;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 2rem;
+}
+
+.title {
+    padding-top: 30px;
+    padding-bottom: 10px;
+    font-family: "Dancing Script", cursive;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 4rem;
+}
+
+.text {
+    font-family: "Raleway", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    padding-inline: 25%;
+    font-size: 1rem;
+}
+
+.cardsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: flex-start;
+    padding: 16px;
+    padding-inline: 10%;
+    padding-bottom: 3rem;
+  }
+  
+  .card {
+    background-color: #fff;
+    border: 1px solid #ddd; 
+    width: calc(25% - 16px);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .cardImage {
+    width: 100%;
+    height: auto;
+    margin-bottom: 12px;
+  }
+  
+  .cardTitle {
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 1rem;
+  }
+  
+  .cardPrice {
+    color: #555;
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+  
+  .cardButton {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 0.9rem;
+    background-color: #d1c8c1;
+    color: #000;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+  }
+  
+  .cardButton:hover {
+    background-color: #8D7868;
+  }
+  
+

@@ -1,16 +1,34 @@
-import Hero from "@/components/hero";
-import ConnectSupabaseSteps from "@/components/tutorial/connect-supabase-steps";
-import SignUpUserSteps from "@/components/tutorial/sign-up-user-steps";
-import { hasEnvVars } from "@/utils/supabase/check-env-vars";
+import styles from './styles/Home.module.css';
+import Link from "next/link";
 
-export default async function Index() {
+const Home = () => {
   return (
-    <>
-      <Hero />
-      <main className="flex-1 flex flex-col gap-6 px-4">
-        <h2 className="font-medium text-xl mb-4">Next steps</h2>
-        {hasEnvVars ? <SignUpUserSteps /> : <ConnectSupabaseSteps />}
-      </main>
-    </>
+    <main className={styles.main}>
+      <section className={styles.hero}>
+        <img src="/HOME/COVER.png" alt="Bolsa principal" className={styles.heroImage} />
+      </section>
+
+      <section className={styles.content}>
+        <div className={styles.description}>
+          <p>
+            En Efectos encontrarás una exclusiva selección de bolsas diseñadas
+            para cada estilo, además de pequeños tesoros y accesorios únicos.
+            Descubre el complemento perfecto para cualquier ocasión y añade un
+            toque especial a tu día.
+          </p>
+          <Link href="/productos" passHref legacyBehavior>
+            <a className={styles.button}>CONOCE NUESTROS PRODUCTOS</a>
+          </Link>
+        </div>
+
+        <div className={styles.products}>
+          <div className={styles.product}><img src="/HOME/MOXILA.png" alt="Bolsa 2" /></div>
+          <div className={styles.product}><img src="/HOME/8.png" alt="Bolsa 3" /></div>
+          <div className={styles.product}><img src="/HOME/12.png" alt="Bolsa 4" /></div>
+        </div>
+      </section>
+    </main>
   );
-}
+};
+
+export default Home;

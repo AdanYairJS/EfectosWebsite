@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital@0;1&display=swap');
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.title {
+  font-family: "Dancing Script", cursive;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 4rem;
+}
+
+.imageTextContainer {
+  display: flex;
+  flex-direction: column; /* Cambia a columna para dispositivos móviles */
+  align-items: center;
+  gap: 16px;
+  padding: 30px 10%;
+}
+
+.image {
+  max-width: 100%; /* Asegura que la imagen no exceda el contenedor */
+  height: auto;
+  margin-bottom: 16px; /* Añade espacio entre la imagen y el título */
+}
+
+.textContainer {
+  width: 100%; /* Ajusta para ocupar todo el ancho en móviles */
+  text-align: center; /* Centra el texto debajo de la imagen */
+}
+
+.paragraph {
+  font-family: "Raleway", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1rem;
+}
+
+.stepsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.stepsTitle {
+  font-size: 1.8rem;
+  font-weight: bolder;
+  text-align: center;
+}
+
+.stepsList {
+  align-items: center;
+  padding: 15px 20% 30px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.stepItem {
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+}
+
+.stepNumber {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%; /* Asegura la forma circular */
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.stepText {
+  font-family: "Raleway", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1rem;
+}
+
+.button {
+  display: inline-block;
+  align-self: center;
+  padding: 10px 20px;
+  background-color: var(--primary-color);
+  color: #fff;
+  border-radius: 20px;
+  font-weight: bolder;
+  margin-top: 20px; /* Despega el botón del footer */
+}
+
+.button:hover {
+  background-color: #a6194d;
+}
+
