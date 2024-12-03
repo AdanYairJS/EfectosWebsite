@@ -1,63 +1,92 @@
 'use client';
-import { useState } from "react";
-import { useRouter } from "next/navigation"; 
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import {
+  fetchApartados,
+  updateApartadoStatus,
+  logout,
+  supabase,
+} from "@/services/supabaseClient";
 import styles from "../styles/Gestionapartados.module.css";
+
+interface Apartado {
+  id: number;
+  generated_key: string;
+  product_code: string;
+  created_at: string;
+  client_name: string;
+  client_email: string;
+  status: string;
+  payment: number;
+}
 
 const GestionApartados = () => {
   const router = useRouter();
+  const [apartados, setApartados] = useState<Apartado[]>([]);
+  const [loading, setLoading] = useState(true); 
 
-  const [apartados, setApartados] = useState([
-    {
-      id: 1,
-      codigo: "P123",
-      fecha: "2023-11-30",
-      cliente: "Juan Pérez",
-      correo: "juan@example.com",
-      status: "Pendiente",
-    },
-    {
-      id: 2,
-      codigo: "P456",
-      fecha: "2023-12-01",
-      cliente: "María López",
-      correo: "maria@example.com",
-      status: "Pendiente",
-    },
-  ]);
+  useEffect(() => {
+    const checkSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
 
-  const aprobarApartado = (id: number) => {
-    setApartados((prev) =>
-      prev.map((apartado) =>
-        apartado.id === id ? { ...apartado, status: "Aprobado" } : apartado
-      )
+      if (!session) {
+        router.push("/administracion");
+      } else {
+        const data = await fetchApartados();
+        setApartados(data);
+        setLoading(false); 
+      }
+    };
+
+    checkSession();
+  }, [router]);
+
+  const handleAction = async (generatedKey: string, currentStatus: string) => {
+    const newStatus = currentStatus === "Pendiente" ? "Aprobado" : "Liquidado";
+
+    const confirmAction = window.confirm(
+      `¿Estás seguro de que quieres cambiar el estado a "${newStatus}"?`
     );
-  };
 
-  const liquidarApartado = (id: number) => {
-    const confirm = window.confirm(
-      "¿Estás seguro de que quieres liquidar este apartado?"
-    );
-    if (confirm) {
-      setApartados((prev) => prev.filter((apartado) => apartado.id !== id));
-    }
-  };
+    if (!confirmAction) return;
 
-  const handleAction = (id: number, status: string) => {
-    if (status === "Pendiente") {
-      const confirm = window.confirm(
-        "¿Estás seguro de que quieres aprobar este apartado?"
+    const success = await updateApartadoStatus(generatedKey, newStatus);
+
+    if (success) {
+      setApartados((prev) =>
+        prev.map((apartado) =>
+          apartado.generated_key === generatedKey
+            ? { ...apartado, status: newStatus }
+            : apartado
+        )
       );
-      if (confirm) {
-        aprobarApartado(id);
+
+      if (newStatus === "Liquidado") {
+        setApartados((prev) =>
+          prev.filter((apartado) => apartado.generated_key !== generatedKey)
+        );
       }
     } else {
-      liquidarApartado(id);
+      alert("Hubo un error al actualizar el estado del apartado.");
     }
   };
 
-  const handleLogout = () => {
-    router.push("/administracion"); 
+  const handleLogout = async () => {
+    const success = await logout();
+    if (success) {
+      router.push("/administracion");
+    } else {
+      alert("Hubo un error al cerrar sesión.");
+    }
   };
+
+  if (loading) {
+    return (
+    <main className={styles.gestionPage}>
+      <h1 className={styles.gestionTitle}>Verificando sesión...</h1>
+    </main>
+  ); 
+  }
 
   return (
     <main className={styles.gestionPage}>
@@ -68,34 +97,46 @@ const GestionApartados = () => {
         </button>
       </div>
 
-      {apartados.map((apartado) => (
-        <div key={apartado.id} className={styles.apartadoCard}>
-          <p>
-            <strong>Clave de apartado:</strong> {apartado.id}
-          </p>
-          <p>
-            <strong>Código de producto:</strong> {apartado.codigo}
-          </p>
-          <p>
-            <strong>Fecha de apartado:</strong> {apartado.fecha}
-          </p>
-          <p>
-            <strong>Nombre del cliente:</strong> {apartado.cliente}
-          </p>
-          <p>
-            <strong>Correo del cliente:</strong> {apartado.correo}
-          </p>
-          <p>
-            <strong>Status de apartado:</strong> {apartado.status}
-          </p>
-          <button
-            onClick={() => handleAction(apartado.id, apartado.status)}
-            className={styles.aprobarButton}
-          >
-            {apartado.status === "Pendiente" ? "APROBAR" : "LIQUIDAR"}
-          </button>
-        </div>
-      ))}
+      {apartados.length > 0 ? (
+        apartados
+          .filter((apartado) => apartado.status !== "Liquidado") 
+          .map((apartado) => (
+            <div key={apartado.generated_key} className={styles.apartadoCard}>
+              <p>
+                <strong>Clave de apartado:</strong> {apartado.generated_key}
+              </p>
+              <p>
+                <strong>Código de producto:</strong> {apartado.product_code}
+              </p>
+              <p>
+                <strong>Fecha de apartado:</strong>{" "}
+                {new Date(apartado.created_at).toLocaleDateString()}
+              </p>
+              <p>
+                <strong>Nombre del cliente:</strong> {apartado.client_name}
+              </p>
+              <p>
+                <strong>Correo del cliente:</strong> {apartado.client_email}
+              </p>
+              <p>
+                <strong>Pago realizado:</strong> ${apartado.payment.toFixed(2)}
+              </p>
+              <p>
+                <strong>Status de apartado:</strong> {apartado.status}
+              </p>
+              <button
+                onClick={() =>
+                  handleAction(apartado.generated_key, apartado.status)
+                }
+                className={styles.aprobarButton}
+              >
+                {apartado.status === "Pendiente" ? "APROBAR" : "LIQUIDAR"}
+              </button>
+            </div>
+          ))
+      ) : (
+        <p>No hay apartados disponibles.</p>
+      )}
     </main>
   );
 };
