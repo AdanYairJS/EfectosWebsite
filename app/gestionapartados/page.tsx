@@ -1,8 +1,11 @@
 'use client';
 import { useState } from "react";
+import { useRouter } from "next/navigation"; 
 import styles from "../styles/Gestionapartados.module.css";
 
 const GestionApartados = () => {
+  const router = useRouter();
+
   const [apartados, setApartados] = useState([
     {
       id: 1,
@@ -31,7 +34,12 @@ const GestionApartados = () => {
   };
 
   const liquidarApartado = (id: number) => {
-    setApartados((prev) => prev.filter((apartado) => apartado.id !== id));
+    const confirm = window.confirm(
+      "¿Estás seguro de que quieres liquidar este apartado?"
+    );
+    if (confirm) {
+      setApartados((prev) => prev.filter((apartado) => apartado.id !== id));
+    }
   };
 
   const handleAction = (id: number, status: string) => {
@@ -47,9 +55,19 @@ const GestionApartados = () => {
     }
   };
 
+  const handleLogout = () => {
+    router.push("/administracion"); 
+  };
+
   return (
     <main className={styles.gestionPage}>
-      <h1 className={styles.gestionTitle}>Gestión de Apartados</h1>
+      <div className={styles.header}>
+        <h1 className={styles.gestionTitle}>Gestión de Apartados</h1>
+        <button onClick={handleLogout} className={styles.logoutButton}>
+          CERRAR SESIÓN
+        </button>
+      </div>
+
       {apartados.map((apartado) => (
         <div key={apartado.id} className={styles.apartadoCard}>
           <p>
@@ -83,4 +101,3 @@ const GestionApartados = () => {
 };
 
 export default GestionApartados;
-

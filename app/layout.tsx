@@ -1,6 +1,6 @@
 import { GeistSans } from "geist/font/sans";
 import Header from "./components/Header";
-import Footer from "./components/Footer"
+import Footer from "./components/Footer";
 import "./globals.css";
 
 const defaultUrl = process.env.VERCEL_URL
@@ -20,10 +20,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={GeistSans.className} suppressHydrationWarning>
+      <head>
+        <link rel="icon" href="/FAVICON.ico" type="image/x-icon" />
+        <title>{metadata.title}</title>
+        <meta name="description" content={metadata.description} />
+      </head>
       <body className="bg-background text-foreground">
-        <Header/>
+        <Header />
         {children}
-        <Footer/>
+        <Footer />
       </body>
     </html>
   );
