@@ -12,18 +12,26 @@ const Login = () => {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
 
-    if (error) {
-      alert("Error de inicio de sesión: " + error.message);
-      return;
-    }
+      if (error) {
+        alert("Error de inicio de sesión: " + error.message);
+        return;
+      }
 
-    if (data.user) {
-      router.push("/gestionapartados");
+      if (data.user) {
+        router.push("/gestionapartados");
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        alert("Error inesperado: " + error.message);
+      } else {
+        alert("Error desconocido al iniciar sesión.");
+      }
     }
   };
 
