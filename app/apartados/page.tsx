@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 import ModalApartar from "../components/ModalApartar"; 
 import { fetchProductById } from "@/services/supabaseClient";
 import styles from "../styles/Apartados.module.css";
@@ -37,7 +38,7 @@ const ApartadosPage = () => {
           setProduct(productData);
           setIsModalOpen(true);
         } else {
-          alert(`El producto no existe. ID: ${numericId}`);
+          alert("El producto no existe.");
         }
       }
     };
@@ -80,7 +81,9 @@ const ApartadosPage = () => {
               </li>
             ))}
           </ul>
-          <a href="#" className={styles.button}>BUSCA PRODUCTOS</a>
+          <Link href="/productos" passHref legacyBehavior>
+            <a className={styles.button}>BUSCA PRODUCTOS</a>
+          </Link>
         </section>
 
         {isModalOpen && product && (
