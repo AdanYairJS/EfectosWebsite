@@ -34,6 +34,19 @@ const GestionApartados = () => {
     setApartados((prev) => prev.filter((apartado) => apartado.id !== id));
   };
 
+  const handleAction = (id: number, status: string) => {
+    if (status === "Pendiente") {
+      const confirm = window.confirm(
+        "¿Estás seguro de que quieres aprobar este apartado?"
+      );
+      if (confirm) {
+        aprobarApartado(id);
+      }
+    } else {
+      liquidarApartado(id);
+    }
+  };
+
   return (
     <main className={styles.gestionPage}>
       <h1 className={styles.gestionTitle}>Gestión de Apartados</h1>
@@ -58,11 +71,7 @@ const GestionApartados = () => {
             <strong>Status de apartado:</strong> {apartado.status}
           </p>
           <button
-            onClick={() =>
-              apartado.status === "Pendiente"
-                ? aprobarApartado(apartado.id)
-                : liquidarApartado(apartado.id)
-            }
+            onClick={() => handleAction(apartado.id, apartado.status)}
             className={styles.aprobarButton}
           >
             {apartado.status === "Pendiente" ? "APROBAR" : "LIQUIDAR"}
@@ -74,3 +83,4 @@ const GestionApartados = () => {
 };
 
 export default GestionApartados;
+
