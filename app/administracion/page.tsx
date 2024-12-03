@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { supabase } from "@/services/supabaseClient";
 import styles from "../styles/Administracion.module.css";
 
+export const dynamic = "force-dynamic";
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,6 +14,7 @@ const Login = () => {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
@@ -26,12 +29,8 @@ const Login = () => {
       if (data.user) {
         router.push("/gestionapartados");
       }
-    } catch (error) {
-      if (error instanceof Error) {
-        alert("Error inesperado: " + error.message);
-      } else {
-        alert("Error desconocido al iniciar sesión.");
-      }
+    } catch (err) {
+      alert("Error inesperado: " + (err instanceof Error ? err.message : "Desconocido"));
     }
   };
 

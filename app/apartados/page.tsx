@@ -11,7 +11,7 @@ export const dynamic = "force-dynamic";
 
 const ApartadosPage = () => {
   const searchParams = useSearchParams();
-  const id = searchParams?.get("id") || null; // Manejo seguro de 'searchParams'
+  const id = searchParams?.get("id") || null; 
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [product, setProduct] = useState<{
