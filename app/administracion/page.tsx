@@ -1,19 +1,29 @@
 'use client';
+
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { supabase } from "@/services/supabaseClient"; // Asegúrate de que la ruta sea correcta
 import styles from "../styles/Administracion.module.css";
 
 const Login = () => {
-  const [adminID, setAdminID] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (adminID === "admin" && password === "12345") {
-      router.push("/gestion-apartados");
-    } else {
-      alert("ID o contraseña incorrectos.");
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      alert("Error de inicio de sesión: " + error.message);
+      return;
+    }
+
+    if (data.user) {
+      router.push("/gestionapartados");
     }
   };
 
@@ -21,13 +31,13 @@ const Login = () => {
     <main className={styles.loginPage}>
       <form className={styles.loginForm} onSubmit={handleLogin}>
         <h1 className={styles.loginTitle}>Inicio de sesión</h1>
-        <label htmlFor="adminID">ID de administrador</label>
+        <label htmlFor="email">Correo electrónico</label>
         <input
-          type="text"
-          id="adminID"
-          placeholder="ID de administrador"
-          value={adminID}
-          onChange={(e) => setAdminID(e.target.value)}
+          type="email"
+          id="email"
+          placeholder="Correo electrónico"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           className={styles.inputField}
         />
         <label htmlFor="password">Contraseña</label>
