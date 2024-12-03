@@ -1,20 +1,21 @@
 'use client';
 
 import React from "react";
-import { useRouter } from "next/navigation"; 
+import { useRouter } from "next/navigation";
 import styles from "../styles/Productos.module.css";
 
 interface CardProps {
+  id: number;
   image: string;
   name: string;
   price: number;
 }
 
-const ProductCard: React.FC<CardProps> = ({ image, name, price }) => {
+const ProductCard: React.FC<CardProps> = ({ id, image, name, price }) => {
   const router = useRouter();
 
   const handleApartarClick = () => {
-    router.push(`/apartados?name=${encodeURIComponent(name)}&price=${price}`);
+    router.push(`/apartados?id=${id}`);
   };
 
   return (

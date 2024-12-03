@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { supabase } from "@/services/supabaseClient"; // Asegúrate de que la ruta sea correcta
+import { supabase } from "@/services/supabaseClient";
 import styles from "../styles/Administracion.module.css";
 
 const Login = () => {
