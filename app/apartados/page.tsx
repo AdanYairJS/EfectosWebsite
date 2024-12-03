@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import ModalApartar from "../components/ModalApartar";
 import { fetchProductById } from "@/services/supabaseClient";
@@ -11,7 +11,8 @@ export const dynamic = "force-dynamic";
 
 const ApartadosPage = () => {
   const searchParams = useSearchParams();
-  const id = searchParams?.get("id") || null; 
+  const router = useRouter();
+  const id = searchParams?.get("id");
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [product, setProduct] = useState<{
@@ -54,53 +55,52 @@ const ApartadosPage = () => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+    router.replace("/apartados"); // Limpia el parámetro `id` de la URL
   };
 
   return (
-    <>
-      <main className="flex-1 flex flex-col gap-6 px-4">
-        <section className={styles.section}>
-          <div className={styles.imageTextContainer}>
-            <img
-              src="apartados/apartados.png"
-              alt="Apartados"
-              className={styles.image}
-            />
-            <div className={styles.textContainer}>
-              <h2 className={styles.title}>Apartados</h2>
-              <p className={styles.paragraph}>
-                En Efectos ofrecemos un sistema de apartado para que puedas reservar
-                tus productos favoritos sin preocuparte por la disponibilidad. Asegura
-                ese accesorio que tanto te gusta y recógelo cuando estés listo.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <section className={styles.stepsSection}>
-          <h3 className={styles.stepsTitle}>Pasos para apartar un producto</h3>
-          <ul className={styles.stepsList}>
-            {steps.map((step, index) => (
-              <li key={index} className={styles.stepItem}>
-                <div className={styles.stepNumber}>{index + 1}</div>
-                <p className={styles.stepText}>{step}</p>
-              </li>
-            ))}
-          </ul>
-          <Link href="/productos" passHref legacyBehavior>
-            <a className={styles.button}>BUSCA PRODUCTOS</a>
-          </Link>
-        </section>
-
-        {isModalOpen && product && (
-          <ModalApartar
-            isOpen={isModalOpen}
-            onClose={handleCloseModal}
-            productId={product.id}
+    <main className="flex-1 flex flex-col gap-6 px-4">
+      <section className={styles.section}>
+        <div className={styles.imageTextContainer}>
+          <img
+            src="apartados/apartados.png"
+            alt="Apartados"
+            className={styles.image}
           />
-        )}
-      </main>
-    </>
+          <div className={styles.textContainer}>
+            <h2 className={styles.title}>Apartados</h2>
+            <p className={styles.paragraph}>
+              En Efectos ofrecemos un sistema de apartado para que puedas reservar
+              tus productos favoritos sin preocuparte por la disponibilidad. Asegura
+              ese accesorio que tanto te gusta y recógelo cuando estés listo.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.stepsSection}>
+        <h3 className={styles.stepsTitle}>Pasos para apartar un producto</h3>
+        <ul className={styles.stepsList}>
+          {steps.map((step, index) => (
+            <li key={index} className={styles.stepItem}>
+              <div className={styles.stepNumber}>{index + 1}</div>
+              <p className={styles.stepText}>{step}</p>
+            </li>
+          ))}
+        </ul>
+        <Link href="/productos" passHref legacyBehavior>
+          <a className={styles.button}>BUSCA PRODUCTOS</a>
+        </Link>
+      </section>
+
+      {isModalOpen && product && (
+        <ModalApartar
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          productId={product.id}
+        />
+      )}
+    </main>
   );
 };
 
