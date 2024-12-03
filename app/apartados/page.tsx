@@ -1,18 +1,36 @@
 'use client';
 
-import React, { useState, useEffect } from "react";
+import React, { Suspense, useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import ModalApartar from "../components/ModalApartar"; 
 import { fetchProductById } from "@/services/supabaseClient";
 import styles from "../styles/Apartados.module.css";
 
-const ApartadosPage = () => {
+export const dynamic = "force-dynamic";
+
+const SearchParamsComponent = ({
+  onFetchProduct,
+}: {
+  onFetchProduct: (id: string | null) => void;
+}) => {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
 
+  useEffect(() => {
+    onFetchProduct(id);
+  }, [id, onFetchProduct]);
+
+  return null; // No se necesita renderizar nada para este componente
+};
+
+const ApartadosPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [product, setProduct] = useState<{ id: number; name: string; price: number } | null>(null);
+  const [product, setProduct] = useState<{
+    id: number;
+    name: string;
+    price: number;
+  } | null>(null);
 
   const steps = [
     "Selecciona el producto que deseas apartar desde la sección de productos y haz click en el botón de 'Apartar'.",
@@ -22,29 +40,25 @@ const ApartadosPage = () => {
     "Puedes comprobar el estado de tu apartado en la barra de búsqueda mediante la clave generada, se te notificará por correo electrónico cuando sea aprobada.",
   ];
 
-  useEffect(() => {
-    const fetchProduct = async () => {
-      if (id) {
-        const numericId = Number(id);
+  const fetchProduct = async (id: string | null) => {
+    if (id) {
+      const numericId = Number(id);
 
-        if (isNaN(numericId)) {
-          alert("El ID proporcionado no es un número válido.");
-          return;
-        }
-
-        const productData = await fetchProductById(numericId);
-
-        if (productData) {
-          setProduct(productData);
-          setIsModalOpen(true);
-        } else {
-          alert("El producto no existe.");
-        }
+      if (isNaN(numericId)) {
+        alert("El ID proporcionado no es un número válido.");
+        return;
       }
-    };
 
-    fetchProduct();
-  }, [id]);
+      const productData = await fetchProductById(numericId);
+
+      if (productData) {
+        setProduct(productData);
+        setIsModalOpen(true);
+      } else {
+        alert("El producto no existe.");
+      }
+    }
+  };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -87,15 +101,19 @@ const ApartadosPage = () => {
         </section>
 
         {isModalOpen && product && (
-        <ModalApartar
-          isOpen={isModalOpen}
-          onClose={handleCloseModal}
-          productId={product.id}
-        />
-      )}
+          <ModalApartar
+            isOpen={isModalOpen}
+            onClose={handleCloseModal}
+            productId={product.id}
+          />
+        )}
       </main>
+
+      <Suspense fallback={<p>Cargando parámetros de búsqueda...</p>}>
+        <SearchParamsComponent onFetchProduct={fetchProduct} />
+      </Suspense>
     </>
   );
-}
+};
 
 export default ApartadosPage;
